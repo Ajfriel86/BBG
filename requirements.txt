@@ -1,0 +1,30 @@
+asgiref==3.7.2                  # ASGI framework for Django and other Python web frameworks
+bleach==6.1.0                   # HTML sanitization library
+certifi==2024.2.2               # Python package for providing Mozilla's CA Bundle
+cffi==1.16.0                    # Foreign Function Interface for Python calling C code
+charset-normalizer==3.3.2       # Library for normalizing character encodings
+cloudinary==1.38.0              # Python SDK for Cloudinary media management
+cryptography==42.0.3            # Cryptographic library for Python
+defusedxml==0.7.1               # XML bomb protection library for Python
+dj-database-url==0.5.0          # Django database configuration from URL
+dj3-Cloudinary-storage==0.0.6   # Django storage for Cloudinary
+Django==5.0.2                   # High-level Python web framework
+Django-allauth==0.61.1          # Django authentication with social account integration
+Django-crispy-forms==2.1        # Django form layouts using Twitter Bootstrap
+django-summernote==0.8.20.0     # Django WYSIWYG editor using Summernote
+gunicorn==21.2.0                # Python WSGI HTTP server
+idna==3.6                       # Internationalized Domain Names in Applications
+oauthlib==3.2.2                 # OAuth library for Python
+packaging==23.2                 # Core utilities for Python packages
+psycopg2==2.9.9                 # PostgreSQL adapter for Python
+pycparser==2.21                 # C parser and AST generator written in Python
+PyJWT==2.8.0                    # JSON Web Token implementation in Python
+python3-openid==3.2.0           # Python OpenID library
+pytz==2024.1                    # World timezone definitions for Python
+requests==2.31.0                # HTTP library for Python
+requests-oauthlib==1.3.1        # OAuth library for Python requests
+six==1.16.0                     # Python 2 and 3 compatibility library
+sqlparse==0.4.4                 # SQL parsing and formatting library
+tzdata==2023.4                  # Timezone database for Python
+urllib3==1.26.15                # HTTP library for Python
+webencodings==0.5.1             # Character encoding aliases for HTML and CSS

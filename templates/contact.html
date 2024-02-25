@@ -1,0 +1,24 @@
+<!-- Inherits from the base template to maintain a consistent layout across the site -->
+{% extends 'base.html' %}
+
+{% load i18n %} <!-- Load the internationalization tag library -->
+{% load account socialaccount %} <!-- Load the django-allauth account and social account tag libraries -->
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %} <!-- Sets the title of the page, using the trans tag to enable translation -->
+
+<!-- Content block where the specific page content will be inserted -->
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Sets the column width and margin for the contact form -->
+        <div class="col-md-8 mt-3 offset-md-2 contact-box">
+            <h2>Contact Us</h2> <!-- Heading for the contact form -->
+            <form method="post">
+                {% csrf_token %} <!-- Includes CSRF token for security -->
+                {{ form.as_p }} <!-- Renders the form fields as paragraph elements -->
+                <button type="submit" class="btn btn-primary">Send</button> <!-- Submit button for the form -->
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

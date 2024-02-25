@@ -1,0 +1,18 @@
+"""
+WSGI config for BBG project.
+
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
+"""
+
+import os  # Import os module
+
+# Import get_wsgi_application function from django.core.wsgi
+from django.core.wsgi import get_wsgi_application
+
+# Set default Django settings module
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BBG.settings')
+
+application = get_wsgi_application()  # Get the WSGI application
