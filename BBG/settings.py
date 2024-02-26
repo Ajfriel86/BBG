@@ -1,8 +1,12 @@
 # Standard import statements for Django settings
 import os
+import sys
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Load environment variables from `env.py` if it exists
 if os.path.isfile("env.py"):
@@ -14,7 +18,8 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Security settings: SECRET_KEY for cryptographic signing, DEBUG mode setting, and allowed hosts for HTTP requests
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
+
 ALLOWED_HOSTS = [
     'brutalgroovegazette-21582aff96df.herokuapp.com',
     'localhost',
@@ -34,8 +39,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
     # UI enhancement apps
     'crispy_bootstrap5',
@@ -95,9 +100,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BBG.wsgi.application'
 
 # Database configuration, using dj_database_url for parsing DATABASE_URL from environment variables
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
+if "DEVELOPMENT" in os.environ:
+    print('development environment')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        },
+    }
+else:
+    print('production environment')
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+# Database for testing
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'rntxdypg',  # Your database name
+#         'USER': 'rntxdypg',  # Your database username
+#         'PASSWORD': 'hVEtA75OJkYLgPsn5H4KXKHHLwZ34s7t',  # Your database password
+#         'HOST': 'trumpet.db.elephantsql.com',  # Just the hostname here
+#         'PORT': '5432',  # Default PostgreSQL port
+#         'OPTIONS': {
+#             'sslmode': 'require',  # Require SSL mode for the connection
+#         },
+#     }
+# }
+
+# Credentials for database for testing
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
+
 
 # Password validation configuration
 AUTH_PASSWORD_VALIDATORS = [
@@ -115,27 +152,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Email backend configuration for sending emails through the console or SMTP
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your_email@gmail.com'
-EMAIL_HOST_PASSWORD = 'your_password'
-
 # Internationalization settings, including language code and timezone
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Cloudinary settings
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
+)
+
 # Static and media files configuration, including URLs and storage backends
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 # Crispy forms configuration for Bootstrap 5
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

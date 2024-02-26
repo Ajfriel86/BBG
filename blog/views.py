@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class CombinedHomeView(ListView):
     # ListView to display a list of posts
     model = Post  # Specifies the model to use
-    template_name = "index.html"  # Template file to render
+    template_name = "home.html"  # Template file to render
     # Context name that will be used in the template
     context_object_name = "post_list"
     paginate_by = 6  # Number of posts per page

@@ -2,7 +2,6 @@
 {% extends "base.html" %}  
 <!-- Content block where the specific page content will be inserted -->
 {% block content %}  
-<main role="main">
 <!-- Carousel section -->
         <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
             <!-- Indicators for each carousel slide -->
@@ -25,7 +24,6 @@
                             <div class="carousel-caption {% if forloop.first %}text-start{% elif forloop.last %}text-end{% else %}text-center{% endif %}">
                                 <h1>{{ hero.title }}</h1>
                                 <p class="opacity-75">{{ hero.caption }}</p>
-                                <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
                             </div>
                         </div>
                     </div>
@@ -78,13 +76,13 @@
             {% for post in post_list %}
             <!-- Divider for each featurette -->
             <hr class="featurette-divider">
-            <div class="row featurette">
-                <div class="col-md-7">
+            <div class="card-main">
+                <div class="card-img">
                     <img src=" {{ post.featured_image.url }}" class="featurette-image img-fluid mx-auto" width="500"
                         height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
                         preserveAspectRatio="xMidYMid slice" focusable="false">
                 </div>
-                <div class="col-md-5">
+                <div class = "card-text">
                     <p class="lead">Author: {{ post.author }}</p>
                     <a href="{% url 'post_detail' post.slug  %}" class="post-link">
                         <h2 class="featurette-heading">{{ post.title }}</h2>
@@ -113,4 +111,3 @@
         {% endif %}
         {%endblock%}
     </div>
-</main>
